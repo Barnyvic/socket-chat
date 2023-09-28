@@ -51,9 +51,9 @@ const initializeSocket = (io) => {
                   );
             });
 
-            socket.on('disconnectUser', async (username) => {
-                  console.log(username.username, 'THIS IS POWER');
-                  const user = await userLeave(username);
+            socket.on('disconnect', () => {
+                  const user = userLeave(socket.id);
+
                   if (user) {
                         io.to(user.room).emit(
                               'message',
@@ -65,12 +65,10 @@ const initializeSocket = (io) => {
 
                         io.to(user.room).emit('roomUsers', {
                               room: user.room,
-                              users: await getRoomUsers(user.room),
+                              users: getRoomUsers(user.room),
                         });
                   }
             });
-
-            socket.on('disconnect', async () => {});
       });
 };
 

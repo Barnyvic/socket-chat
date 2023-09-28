@@ -20,9 +20,8 @@ async function getCurrentUser(id) {
       return await UserModel.findOne({ id });
 }
 
-async function userLeave(username) {
-            console.log(username, 'THIS000000000');
-      return await UserModel.findOneAndDelete({ username: username });
+async function userLeave(id) {
+      return await UserModel.findOneAndDelete({ id: id });
 }
 
 async function getRoomUsers(room) {

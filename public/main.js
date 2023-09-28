@@ -23,17 +23,6 @@ socket.on('message', (message) => {
       chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-function leaveRoom(username) {
-document.getElementById('leave-btn').addEventListener('click', () => {
-      const leaveRoom = confirm('Are you sure you want to leave the chatroom?');
-
-      if (leaveRoom) {
-            socket.emit('disconnectUser', username);
-            window.location = '../index.html';
-      }
-});
-}
-
 chatForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -75,8 +64,14 @@ function outputUsers(users) {
       users.forEach((user) => {
             const li = document.createElement('li');
             li.innerText = user.username;
-           console.log(li.innerText);
+            console.log(li.innerText);
             userList.appendChild(li);
       });
 }
 
+document.getElementById('leave-btn').addEventListener('click', () => {
+      const leaveRoom = confirm('Are you sure you want to leave the chatroom?');
+      if (leaveRoom) {
+            window.location = '../index.html';
+      }
+});
