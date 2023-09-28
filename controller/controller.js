@@ -4,8 +4,6 @@ const UserModel = require('../model/user');
 async function userJoin(id, username, room) {
       const existingUser = await UserModel.findOne({ username, room });
 
-      console.log(existingUser);
-
       if (existingUser) {
             return existingUser;
       }
