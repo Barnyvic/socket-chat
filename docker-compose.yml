@@ -1,5 +1,15 @@
 version: '3'
+
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
   app:
     container_name: docker-node-mongo
     restart: always
@@ -8,8 +18,14 @@ services:
       - '3000:3000'
     external_links:
       - mongo
+
   mongo:
     container_name: mongo
-    image: mongo
+    image: mongo:latest
     ports:
       - '27017:27017'
+
+networks:
+  default:
+    name: socket-manager
+
